@@ -1,0 +1,20 @@
+{
+	"name": "TablasSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adventureworks",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_LJ"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Product"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

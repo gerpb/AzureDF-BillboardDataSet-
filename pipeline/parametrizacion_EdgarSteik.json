@@ -1,0 +1,183 @@
+{
+	"name": "parametrizacion_EdgarSteik",
+	"properties": {
+		"activities": [
+			{
+				"name": "Cargas_Parametros",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "folder_csv_edgarsteik",
+						"type": "DatasetReference",
+						"parameters": {
+							"conteiner": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.folder_csv",
+								"type": "Expression"
+							},
+							"file_name": "cargas.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "parquet_edgarsteik",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.folder_parquet",
+								"type": "Expression"
+							},
+							"name_file": "cargas_parquet"
+						}
+					}
+				]
+			},
+			{
+				"name": "Sitios_Parametros",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "folder_csv_edgarsteik",
+						"type": "DatasetReference",
+						"parameters": {
+							"conteiner": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.folder_csv",
+								"type": "Expression"
+							},
+							"file_name": "sitios.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "parquet_edgarsteik",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.folder_parquet",
+								"type": "Expression"
+							},
+							"name_file": "sitios_parquet"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"container": {
+				"type": "string",
+				"defaultValue": "edgar-steik-parametrizacion"
+			},
+			"folder_csv": {
+				"type": "string",
+				"defaultValue": "csv_data"
+			},
+			"folder_parquet": {
+				"type": "string",
+				"defaultValue": "parquet_data"
+			}
+		},
+		"folder": {
+			"name": "Edgar_Steik"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-10T14:40:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

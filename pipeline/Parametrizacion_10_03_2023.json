@@ -1,0 +1,183 @@
+{
+	"name": "Parametrizacion_10_03_2023",
+	"properties": {
+		"activities": [
+			{
+				"name": "cargas",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "carga_csv_alvaro",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.alvaro_parame_folder_csv",
+								"type": "Expression"
+							},
+							"file_name": "cargas.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "alvaro_parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.alvaro_folder_parquet",
+								"type": "Expression"
+							},
+							"name_file": "cargas"
+						}
+					}
+				]
+			},
+			{
+				"name": "sitios",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "carga_csv_alvaro",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.alvaro_parame_folder_csv",
+								"type": "Expression"
+							},
+							"file_name": "sitios.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "alvaro_parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder_name": {
+								"value": "@pipeline().parameters.alvaro_folder_parquet",
+								"type": "Expression"
+							},
+							"name_file": "sitios"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"container": {
+				"type": "string",
+				"defaultValue": "alvaro-flores"
+			},
+			"alvaro_parame_folder_csv": {
+				"type": "string",
+				"defaultValue": "Parametrizacion/csv_data"
+			},
+			"alvaro_folder_parquet": {
+				"type": "string",
+				"defaultValue": "Parametrizacion/parquet_data"
+			}
+		},
+		"folder": {
+			"name": "Alvaro_Flores"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-10T14:57:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

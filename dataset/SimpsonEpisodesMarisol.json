@@ -1,0 +1,28 @@
+{
+	"name": "SimpsonEpisodesMarisol",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ContenedorMarisolParedes",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_MarisolParedes"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "episodes",
+				"folderPath": "marisol-paredes/DataFlow/SimponsEntrada",
+				"fileSystem": "formacion-febreromarzo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

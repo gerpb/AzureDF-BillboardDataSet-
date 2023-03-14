@@ -1,0 +1,183 @@
+{
+	"name": "parametrizacionGer",
+	"properties": {
+		"activities": [
+			{
+				"name": "carga",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "csvclaseparametrizacionGer",
+						"type": "DatasetReference",
+						"parameters": {
+							"contenedor": {
+								"value": "@pipeline().parameters.contenedor",
+								"type": "Expression"
+							},
+							"nombre_carpeta": {
+								"value": "@pipeline().parameters.nombre_carpeta",
+								"type": "Expression"
+							},
+							"nombre_archivo": "cargas.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ParquetparametrizacionGer",
+						"type": "DatasetReference",
+						"parameters": {
+							"contenedor": {
+								"value": "@pipeline().parameters.contenedor",
+								"type": "Expression"
+							},
+							"nombre_carpeta": {
+								"value": "@pipeline().parameters.carpeta_parquet",
+								"type": "Expression"
+							},
+							"nombre_archivo": "cargas_parquet"
+						}
+					}
+				]
+			},
+			{
+				"name": "sitios",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "csvclaseparametrizacionGer",
+						"type": "DatasetReference",
+						"parameters": {
+							"contenedor": {
+								"value": "@pipeline().parameters.contenedor",
+								"type": "Expression"
+							},
+							"nombre_carpeta": {
+								"value": "@pipeline().parameters.nombre_carpeta",
+								"type": "Expression"
+							},
+							"nombre_archivo": "sitios.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ParquetparametrizacionGer",
+						"type": "DatasetReference",
+						"parameters": {
+							"contenedor": {
+								"value": "@pipeline().parameters.contenedor",
+								"type": "Expression"
+							},
+							"nombre_carpeta": {
+								"value": "@pipeline().parameters.carpeta_parquet",
+								"type": "Expression"
+							},
+							"nombre_archivo": "sitios_parquet"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"contenedor": {
+				"type": "string",
+				"defaultValue": "german"
+			},
+			"nombre_carpeta": {
+				"type": "string",
+				"defaultValue": "csv_data"
+			},
+			"carpeta_parquet": {
+				"type": "string",
+				"defaultValue": "parquet_data"
+			}
+		},
+		"folder": {
+			"name": "German"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-10T14:57:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

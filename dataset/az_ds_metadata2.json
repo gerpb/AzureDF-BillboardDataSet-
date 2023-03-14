@@ -1,0 +1,28 @@
+{
+	"name": "az_ds_metadata2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalakeformacionanalitica",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_AlvaroFlores/Metadata"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "abr 2015.csv",
+				"folderPath": "raw/Ventas",
+				"fileSystem": "data-factory"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

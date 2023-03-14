@@ -1,0 +1,34 @@
+{
+	"name": "AdventureWorksMarisol",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adventureworks",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"NombreTabla": {
+				"type": "string"
+			},
+			"NombreEsquema": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Datasets_MarisolParedes"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().NombreEsquema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().NombreTabla",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

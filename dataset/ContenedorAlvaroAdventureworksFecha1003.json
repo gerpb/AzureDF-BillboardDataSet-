@@ -1,0 +1,27 @@
+{
+	"name": "ContenedorAlvaroAdventureworksFecha1003",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalakeformacionanalitica",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_AlvaroFlores"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "AdventureWorks/10_03_2023",
+				"fileSystem": "alvaro-flores"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

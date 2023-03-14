@@ -1,0 +1,183 @@
+{
+	"name": "Parametrizacion Chris Redfield",
+	"properties": {
+		"activities": [
+			{
+				"name": "Cargas",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Carpeta_CSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.Container",
+								"type": "Expression"
+							},
+							"Carpeta": {
+								"value": "@pipeline().parameters.Carpeta_CSV",
+								"type": "Expression"
+							},
+							"Archivo": "cargas.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Carpeta_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.Container",
+								"type": "Expression"
+							},
+							"Carpeta": {
+								"value": "@pipeline().parameters.Carpeta_Parquet",
+								"type": "Expression"
+							},
+							"Archivo": "cargas"
+						}
+					}
+				]
+			},
+			{
+				"name": "Sitios",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Carpeta_CSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.Container",
+								"type": "Expression"
+							},
+							"Carpeta": {
+								"value": "@pipeline().parameters.Carpeta_CSV",
+								"type": "Expression"
+							},
+							"Archivo": "sitios.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Carpeta_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.Container",
+								"type": "Expression"
+							},
+							"Carpeta": {
+								"value": "@pipeline().parameters.Carpeta_Parquet",
+								"type": "Expression"
+							},
+							"Archivo": "sitios"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"Container": {
+				"type": "string",
+				"defaultValue": "chris-redfield-pipeline"
+			},
+			"Carpeta_CSV": {
+				"type": "string",
+				"defaultValue": "CSV"
+			},
+			"Carpeta_Parquet": {
+				"type": "string",
+				"defaultValue": "Parquet"
+			}
+		},
+		"folder": {
+			"name": "Chris Redfield"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-11T02:11:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

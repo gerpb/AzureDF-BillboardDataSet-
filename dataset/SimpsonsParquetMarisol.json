@@ -1,0 +1,24 @@
+{
+	"name": "SimpsonsParquetMarisol",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ContenedorMarisolParedes",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_MarisolParedes"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "marisol-paredes/DataFlow/SimpsonsSalida",
+				"fileSystem": "formacion-febreromarzo"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,16 @@
+{
+	"name": "AdventureWorksGer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adventureworks",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DatasetsGer"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

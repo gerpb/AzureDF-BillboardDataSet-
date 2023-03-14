@@ -1,0 +1,27 @@
+{
+	"name": "Tablas_AdventureWorks_Chris",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalakeformacionanalitica",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets Chris Redfield"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "AdventureWorks/13-03-2023",
+				"fileSystem": "chris-redfield-pipeline"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

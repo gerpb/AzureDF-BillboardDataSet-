@@ -1,0 +1,133 @@
+{
+	"name": "AdventureWorksOptimizado",
+	"properties": {
+		"activities": [
+			{
+				"name": "NombreTablas",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT * FROM AdventureWorks.INFORMATION_SCHEMA.TABLES\nWHERE table_type= 'BASE TABLE'",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AdventureWorksBMarisol",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ParaCadaTabla",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "NombreTablas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('NombreTablas').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Guardado Tablas",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "AdventureWorksMarisol",
+									"type": "DatasetReference",
+									"parameters": {
+										"NombreTabla": {
+											"value": "@item().table_name",
+											"type": "Expression"
+										},
+										"NombreEsquema": {
+											"value": "@item().table_schema",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ContenedorAdventureWorks_MarisolParedes",
+									"type": "DatasetReference",
+									"parameters": {
+										"Contenedor": "formacion-febreromarzo",
+										"CarpetaCSV": {
+											"value": "@concat('marisol-paredes/AdventureWorks/',formatDateTime(utcNow(),'dd-MM-yyyy'))",
+											"type": "Expression"
+										},
+										"NombreArchivo": {
+											"value": "@concat(item().table_schema,item().table_name,'.csv')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "Marisol"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-13T19:09:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

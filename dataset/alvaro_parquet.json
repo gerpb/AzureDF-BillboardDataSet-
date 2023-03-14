@@ -1,0 +1,45 @@
+{
+	"name": "alvaro_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalakeformacionanalitica",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"folder_name": {
+				"type": "string"
+			},
+			"name_file": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Datasets_AlvaroFlores"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().name_file",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder_name",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,45 @@
+{
+	"name": "Carpeta_Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalakeformacionanalitica",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Container": {
+				"type": "string"
+			},
+			"Carpeta": {
+				"type": "string"
+			},
+			"Archivo": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Datasets Chris Redfield"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Archivo",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Carpeta",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().Container",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

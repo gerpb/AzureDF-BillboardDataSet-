@@ -1,0 +1,16 @@
+{
+	"name": "TablasAdventureWorks_EdgarSteik",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adventureworks",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_EdgarSteik"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

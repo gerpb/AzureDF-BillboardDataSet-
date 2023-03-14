@@ -1,0 +1,16 @@
+{
+	"name": "AdventureWorksBMarisol",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adventureworks",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Datasets_MarisolParedes"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

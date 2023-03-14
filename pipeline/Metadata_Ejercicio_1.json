@@ -1,0 +1,37 @@
+{
+	"name": "Metadata_Ejercicio_1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "TablasSQL",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"exists",
+						"columnCount",
+						"structure"
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "Data Factory LJ"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-10T15:53:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
