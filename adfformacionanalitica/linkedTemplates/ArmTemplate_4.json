@@ -1,0 +1,443 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nombre de instancia de Data Factory",
+			"defaultValue": "adfformacionanalitica"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/parametrizacion_EdgarSteik')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Cargas_Parametros",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "folder_csv_edgarsteik",
+								"type": "DatasetReference",
+								"parameters": {
+									"conteiner": {
+										"value": "@pipeline().parameters.container",
+										"type": "Expression"
+									},
+									"folder_name": {
+										"value": "@pipeline().parameters.folder_csv",
+										"type": "Expression"
+									},
+									"file_name": "cargas.csv"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "parquet_edgarsteik",
+								"type": "DatasetReference",
+								"parameters": {
+									"container": {
+										"value": "@pipeline().parameters.container",
+										"type": "Expression"
+									},
+									"folder_name": {
+										"value": "@pipeline().parameters.folder_parquet",
+										"type": "Expression"
+									},
+									"name_file": "cargas_parquet"
+								}
+							}
+						]
+					},
+					{
+						"name": "Sitios_Parametros",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "folder_csv_edgarsteik",
+								"type": "DatasetReference",
+								"parameters": {
+									"conteiner": {
+										"value": "@pipeline().parameters.container",
+										"type": "Expression"
+									},
+									"folder_name": {
+										"value": "@pipeline().parameters.folder_csv",
+										"type": "Expression"
+									},
+									"file_name": "sitios.csv"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "parquet_edgarsteik",
+								"type": "DatasetReference",
+								"parameters": {
+									"container": {
+										"value": "@pipeline().parameters.container",
+										"type": "Expression"
+									},
+									"folder_name": {
+										"value": "@pipeline().parameters.folder_parquet",
+										"type": "Expression"
+									},
+									"name_file": "sitios_parquet"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"container": {
+						"type": "string",
+						"defaultValue": "edgar-steik-parametrizacion"
+					},
+					"folder_csv": {
+						"type": "string",
+						"defaultValue": "csv_data"
+					},
+					"folder_parquet": {
+						"type": "string",
+						"defaultValue": "parquet_data"
+					}
+				},
+				"folder": {
+					"name": "Edgar_Steik"
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-03-10T14:40:09Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Simpsons')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SimpsonEpisodesMarisol",
+								"type": "DatasetReference"
+							},
+							"name": "Episodes"
+						},
+						{
+							"dataset": {
+								"referenceName": "SimpsonCharactersMarisol",
+								"type": "DatasetReference"
+							},
+							"name": "Characters"
+						},
+						{
+							"dataset": {
+								"referenceName": "SimpsonScriptLinesMarisol",
+								"type": "DatasetReference"
+							},
+							"name": "ScriptLines"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SimpsonsParquetMarisol",
+								"type": "DatasetReference"
+							},
+							"name": "GuardadoParquet"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Episodios"
+						},
+						{
+							"name": "Personajes"
+						},
+						{
+							"name": "LineasDelGuion"
+						},
+						{
+							"name": "PersonajesFemeninos"
+						},
+						{
+							"name": "LineasPersonajesFemeninos"
+						},
+						{
+							"name": "Limpieza"
+						},
+						{
+							"name": "EpisodiosPersonajesFemeninos"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          id as integer,",
+						"          image_url as string,",
+						"          imdb_rating as float,",
+						"          imdb_votes as float,",
+						"          number_in_season as integer,",
+						"          number_in_series as integer,",
+						"          original_air_date as date,",
+						"          original_air_year as integer,",
+						"          production_code as string,",
+						"          season as integer,",
+						"          title as string,",
+						"          us_viewers_in_millions as double,",
+						"          video_url as string,",
+						"          views as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> Episodes",
+						"source(output(",
+						"          id as integer,",
+						"          name as string,",
+						"          normalized_name as string,",
+						"          gender as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> Characters",
+						"source(output(",
+						"          id as integer,",
+						"          episode_id as integer,",
+						"          number as integer,",
+						"          raw_text as string,",
+						"          timestamp_in_ms as integer,",
+						"          speaking_line as string,",
+						"          character_id as integer,",
+						"          location_id as integer,",
+						"          raw_character_text as string,",
+						"          raw_location_text as string,",
+						"          spoken_words as string,",
+						"          normalized_text as string,",
+						"          word_count as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ScriptLines",
+						"Episodes select(mapColumn(",
+						"          id,",
+						"          image_url,",
+						"          imdb_rating,",
+						"          number_in_season,",
+						"          number_in_series,",
+						"          original_air_date,",
+						"          original_air_year,",
+						"          season,",
+						"          title,",
+						"          video_url,",
+						"          views",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> Episodios",
+						"Characters select(mapColumn(",
+						"          id,",
+						"          name = normalized_name,",
+						"          gender",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> Personajes",
+						"ScriptLines select(mapColumn(",
+						"          id,",
+						"          episode_id,",
+						"          number,",
+						"          raw_text,",
+						"          character_id,",
+						"          location_id,",
+						"          raw_character_text,",
+						"          raw_location_text,",
+						"          spoken_words,",
+						"          normalized_text",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> LineasDelGuion",
+						"Personajes filter(gender==\"f\") ~> PersonajesFemeninos",
+						"PersonajesFemeninos, LineasDelGuion join(Personajes@id == character_id,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> LineasPersonajesFemeninos",
+						"LineasPersonajesFemeninos select(mapColumn(",
+						"          id = Personajes@id,",
+						"          name,",
+						"          gender,",
+						"          episode_id,",
+						"          number,",
+						"          raw_text,",
+						"          character_id,",
+						"          location_id,",
+						"          raw_character_text,",
+						"          raw_location_text,",
+						"          spoken_words,",
+						"          normalized_text",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> Limpieza",
+						"Limpieza, Episodios join(episode_id == Episodios@id,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> EpisodiosPersonajesFemeninos",
+						"EpisodiosPersonajesFemeninos sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> GuardadoParquet"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Simpsons')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Simpsons",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Simpsons",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Episodes": {},
+									"Characters": {},
+									"ScriptLines": {},
+									"GuardadoParquet": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Marisol"
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-03-12T20:45:11Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Simpsons')]"
+			]
+		}
+	]
+}

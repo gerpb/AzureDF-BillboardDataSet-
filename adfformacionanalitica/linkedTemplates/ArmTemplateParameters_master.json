@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfformacionanalitica"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"Chris_AdventureWorks_connectionString": {
+			"value": ""
+		},
+		"ContenedorMarisolParedes_accountKey": {
+			"value": ""
+		},
+		"Contenedor_Fran_Olmos_accountKey": {
+			"value": ""
+		},
+		"DataLakeformacionanaliticager_accountKey": {
+			"value": ""
+		},
+		"SQLServer1_connectionString": {
+			"value": ""
+		},
+		"adventureworks_connectionString": {
+			"value": ""
+		},
+		"datalakeformacionanalitica_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"ContenedorMarisolParedes_properties_typeProperties_url": {
+			"value": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"Contenedor_Fran_Olmos_properties_typeProperties_url": {
+			"value": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"DataLakeformacionanaliticager_properties_typeProperties_url": {
+			"value": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"datalakeformacionanalitica_properties_typeProperties_url": {
+			"value": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

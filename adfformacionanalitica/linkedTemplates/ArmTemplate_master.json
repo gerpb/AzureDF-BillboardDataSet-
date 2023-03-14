@@ -1,0 +1,213 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nombre de instancia de Data Factory",
+			"defaultValue": "adfformacionanalitica"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"AzureDataLakeStorage1\""
+		},
+		"Chris_AdventureWorks_connectionString": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"connectionString\"de \"Chris_AdventureWorks\""
+		},
+		"ContenedorMarisolParedes_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"ContenedorMarisolParedes\""
+		},
+		"Contenedor_Fran_Olmos_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"Contenedor_Fran_Olmos\""
+		},
+		"DataLakeformacionanaliticager_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"DataLakeformacionanaliticager\""
+		},
+		"SQLServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"connectionString\"de \"SQLServer1\""
+		},
+		"adventureworks_connectionString": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"connectionString\"de \"adventureworks\""
+		},
+		"datalakeformacionanalitica_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"datalakeformacionanalitica\""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"ContenedorMarisolParedes_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"Contenedor_Fran_Olmos_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"DataLakeformacionanaliticager_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"datalakeformacionanalitica_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://formacionanalitica.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI de la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas."
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Token de SAS para la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfformacionanalitica_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"Chris_AdventureWorks_connectionString": {
+						"value": "[parameters('Chris_AdventureWorks_connectionString')]"
+					},
+					"ContenedorMarisolParedes_accountKey": {
+						"value": "[parameters('ContenedorMarisolParedes_accountKey')]"
+					},
+					"Contenedor_Fran_Olmos_accountKey": {
+						"value": "[parameters('Contenedor_Fran_Olmos_accountKey')]"
+					},
+					"DataLakeformacionanaliticager_accountKey": {
+						"value": "[parameters('DataLakeformacionanaliticager_accountKey')]"
+					},
+					"adventureworks_connectionString": {
+						"value": "[parameters('adventureworks_connectionString')]"
+					},
+					"datalakeformacionanalitica_accountKey": {
+						"value": "[parameters('datalakeformacionanalitica_accountKey')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"ContenedorMarisolParedes_properties_typeProperties_url": {
+						"value": "[parameters('ContenedorMarisolParedes_properties_typeProperties_url')]"
+					},
+					"Contenedor_Fran_Olmos_properties_typeProperties_url": {
+						"value": "[parameters('Contenedor_Fran_Olmos_properties_typeProperties_url')]"
+					},
+					"DataLakeformacionanaliticager_properties_typeProperties_url": {
+						"value": "[parameters('DataLakeformacionanaliticager_properties_typeProperties_url')]"
+					},
+					"datalakeformacionanalitica_properties_typeProperties_url": {
+						"value": "[parameters('datalakeformacionanalitica_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfformacionanalitica_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfformacionanalitica_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adfformacionanalitica_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SQLServer1_connectionString": {
+						"value": "[parameters('SQLServer1_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfformacionanalitica_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "adfformacionanalitica_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfformacionanalitica_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "adfformacionanalitica_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfformacionanalitica_ArmTemplate_3')]"
+			]
+		}
+	]
+}
