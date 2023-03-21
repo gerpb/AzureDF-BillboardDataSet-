@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DB_Bllbd",
+				"name": "Billboard Schema",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -37,7 +37,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "DB_Bllbd",
+						"activity": "Billboard Schema",
 						"dependencyConditions": [
 							"Succeeded"
 						]
