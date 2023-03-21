@@ -111,7 +111,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"contenedor": "german",
-										"PATH": "rawdata/Billboard",
+										"PATH": "rawdata/Billboard/",
 										"Schema": {
 											"value": "@item().TABLE_SCHEMA",
 											"type": "Expression"
