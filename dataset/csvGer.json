@@ -1,0 +1,74 @@
+{
+	"name": "csvGer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"contenedor": {
+				"type": "string"
+			},
+			"PATH": {
+				"type": "string"
+			},
+			"Schema": {
+				"type": "string"
+			},
+			"Tabla": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Tabla",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat(dataset().PATH, dataset().Schema, '.', dataset().Tabla)",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().contenedor",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}

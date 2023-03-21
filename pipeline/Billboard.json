@@ -46,7 +46,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('DB_Bllbd').output",
+						"value": "@activity('Billboard Schema').output.VALUE",
 						"type": "Expression"
 					},
 					"activities": [
@@ -69,12 +69,14 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "ParquetSink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
-										"type": "ParquetWriteSettings"
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -105,14 +107,11 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Parquet",
+									"referenceName": "csvGer",
 									"type": "DatasetReference",
 									"parameters": {
-										"Contenedor": "german",
-										"PATH": {
-											"value": "rawdata/Billboard/",
-											"type": "Expression"
-										},
+										"contenedor": "german",
+										"PATH": "rawdata/Billboard",
 										"Schema": {
 											"value": "@item().TABLE_SCHEMA",
 											"type": "Expression"
