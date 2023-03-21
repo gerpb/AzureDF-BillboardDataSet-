@@ -1,0 +1,721 @@
+{
+	"name": "Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Contenedor": {
+				"type": "string"
+			},
+			"PATH": {
+				"type": "string"
+			},
+			"Schema": {
+				"type": "string"
+			},
+			"Tabla": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Tabla",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat(dataset().PATH, dataset().Schema,  '.', dataset().Tabla)",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().Contenedor",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "car_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_unix",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_cliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_direccion",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_numero",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_piso",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_dpto",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_entrecalles",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_cp",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_localidad",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_provincia",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_telefono",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_estado_fecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_estado_pago",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_corte_generado_fecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_corte_generado",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_courier",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_fpago",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_comentarios",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_comentarios_internos",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_operador",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_tarjeta_numero",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_tarjeta_vencimiento",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_tarjeta_codigo",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_tarjeta_titular",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_tarjeta_pagos",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_tarjeta_aprobacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_dia",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_mes",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_ano",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_hora",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_campania",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_campania",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_monto",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_nro_guia",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_facturado",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_lote",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_estado_lote",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_ano",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_t_entrega",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_nota_credito",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_estado_logistico",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_oca",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_articulo_ppal",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_status_tango",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_anulado",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_pago_pf",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_aprobacion_bo",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_email",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_telefono_alternativo",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_pais_negocio",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_cotizacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_mail_fc_env",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_inbound",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_monto_DLS",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_entrega",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_franja_horaria",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_sms_enviado",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_entregado",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_asiento_refacturacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_courier",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_epack",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_subarea",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_costo_total",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_export_hermes",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_hermes",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_export_bi",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_mail_ap_bo",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_indice_hermes",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_monto_neto_usd",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_wp_notific",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_donacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_fecha_fin_tratamiento",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_pae_final",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_id_campania_recalc",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_costo_logistica",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_recompra_empresa",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_nombre",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_apellido",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_telefono_particular",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_telefono_laboral",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_email",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_tipo_doc",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_num_doc",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_fecha_nac",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_categoria",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_direccion",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_numero",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_piso",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_dpto",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_entrecalles",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_cp",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_localidad",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_provincia",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_sexo",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_no_email",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_id_pais",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_longitud",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_latitud",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_id_localidad",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_export_hermes",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_rut_autogenerado",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_created",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_profesion",
+				"type": "UTF8"
+			},
+			{
+				"name": "clien_id_fidelidad",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_campania",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_created",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_updated",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_idbase",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_dbsize",
+				"type": "UTF8"
+			},
+			{
+				"name": "cam_id_tipo",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_articulo",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_descripcion",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_marca",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_imagen1",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_opciones",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_proveedor",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_cantidad",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_ritmo_venta",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_tiempo_reposicion",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_aviso_reposicion",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_parent_articulo",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_courier",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_costo_courier",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_costo_envio",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_valor_costo_envio",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_categoria",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_subcategoria",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_linea_producto",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_negocio",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_subnegocio",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_cobranza",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_articulo_n",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_pago_facil",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_costo",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_URL",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_export_bi",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_id_registro",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_email_fc",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_sku",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_regalia",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_formapago",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_descripcion",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_tipo",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_cuotas",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_image",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_metodo",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_id_gc",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_n_estable_gc",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_n_estable_pn",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_asiento_tango",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_recuperable",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_limitar_digitos",
+				"type": "UTF8"
+			},
+			{
+				"name": "form_pago_diferido",
+				"type": "UTF8"
+			},
+			{
+				"name": "est_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "est_estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "est_interno",
+				"type": "UTF8"
+			},
+			{
+				"name": "est_pag_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "est_pag_estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "', format",
+				"type": "UTF8"
+			}
+		]
+	}
+}
