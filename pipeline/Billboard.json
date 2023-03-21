@@ -1,8 +1,40 @@
 {
 	"name": "Billboard",
 	"properties": {
+		"activities": [
+			{
+				"name": "DB_Bllbd",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT * FROM DB_Bllbd.INFORMATION_SCHEMA.TABLES\nWHERE TABLE_SCHEMA != 'sys' AND TABLE_TYPE = 'BASE TABLE'",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "BillboardSQLDataBase",
+						"type": "DatasetReference",
+						"parameters": {
+							"Schema": ".",
+							"Table": "."
+						}
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
 		"folder": {
-			"name": "German"
+			"name": "German/Billboard"
 		},
 		"annotations": []
 	}
