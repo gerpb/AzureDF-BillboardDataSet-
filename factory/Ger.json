@@ -1,0 +1,9 @@
+{
+	"name": "Ger",
+	"location": "brazilsouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c8a05d93-cccf-44da-aff4-6733cb32d287",
+		"tenantId": "3048dc87-43f0-4100-9acb-ae1971c79395"
+	}
+}
