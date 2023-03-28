@@ -150,6 +150,33 @@
 								"referenceName": "Databricks",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "Billboard_Trusted_Joins",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Billboard_Raw_To_Trusted",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/german.perezbottesi@gmail.com/Billboard_trusted_joins"
+							},
+							"linkedServiceName": {
+								"referenceName": "Databricks",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
